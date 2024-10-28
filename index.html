@@ -1,34 +1,18 @@
-{% extends 'base.html' %}
-{% block main %}
-<div class="page-wrap"> 
-    <div class="contents">
-      <br>
-        <section class="content">
-
-            <div class="d-flex justify-content-center">
-                <div class="box">
-                    <h1 class="home-main-title">Welcome to my Website!</h1>
-                    
-                    <h3 style="text-align: center;">Explanation</h3>
-                    <br>
-
-                    <h3 style="color: rgb(110, 14, 14);">Go to Visualizations</h3>
-                    <p></p>
-
-                        <h3>Visualizations available above/h3>
-                        <br>
-
-                    <h3 style="color: rgb(110, 14, 14);">As a Player:</h3>
-                    <p></p>
-
-                        <h3>Bla</h3>
-                        <br>
-
-                    <h3 style="text-align: center;">Thanks for visiting!</h3>
-
-                </div>
-            </div>
-        </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="welcome-stuff">
+        <h1 class="welcome-text">Welcome to My Website!</h1>
+        <p class="subtext">Click the button below to go to another page.</p>
+        <div class="button-container">
+            <button class="button" onclick="window.location.href='otherpage.html'">Go to Other Page</button>
+        </div>
     </div>
-  </div>
-{% endblock %}
+</body>
+</html>
