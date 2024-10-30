@@ -2,7 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3: Filtering selections based on slider input values</title>
+		<title>Lab 3.6</title>
+		<link rel="stylesheet" href="style.css">
 		<script src="https://d3js.org/d3.v7.min.js"></script>
 		<style type="text/css">
 			
@@ -20,115 +21,136 @@
 			}
 
 		</style>
+		
 	</head>
 	<body>
-	
-		<div class="button-container">
-			<button class="button" onclick="window.location.href='index.html'">Back to Home</button>
-		<p></p>
-		<br>
-
-
-        <h2>Total Halloween Spending by Category</h2>
-
-		<p>
-			<input id="slider" type="range" min="0" max="50" step="1" value="0" orient="vertical">
-		</p>
-			
-		<script type="text/javascript">
-
-			//Width and height
-			var w = 600;
-			var h = 250;
-			
-			var dataset = [ { key: "costumes | 39.3", value: 39.3 },		//dataset is now an array of objects.
-							{ key: "candy | 33.0", value: 33.0 },		//Each object has a 'key' and a 'value'.
-							{ key: "decorations | 31.1", value: 31.1 },
-							{ key: "cards | 5.8", value: 5.8 } ];
-			
-			var xScale = d3.scaleBand()
-							.domain(d3.range(dataset.length))
-							.rangeRound([0, w])
-							.paddingInner(0.05);
-			
-			var yScale = d3.scaleLinear()
-							.domain([0, d3.max(dataset, function(d) { return d.value; })])
-							.range([0, h]);
-			
-			//Define key function, to be used when binding data
-			var key = function(d) {
-				return d.key;
-			};
-			
-			//Create SVG element
-			var svg = d3.select("body")
-						.append("svg")
-						.attr("width", w)
-						.attr("height", h);
-
-			//Create bars
-			svg.selectAll("rect")
-			   .data(dataset, key)
-			   .enter()
-			   .append("rect")
-			   .attr("x", function(d, i) {
-			   		return xScale(i);
-			   })
-			   .attr("y", function(d) {
-			   		return h - yScale(d.value);
-			   })
-			   .attr("width", xScale.bandwidth())
-			   .attr("height", function(d) {
-			   		return yScale(d.value);
-			   })
-			   .attr("fill", function(d) {
-					return "rgb(0, 0, " + (d.value * 10) + ")";
-			   });
-
-
-
-			//Create labels
-			svg.selectAll("text")
-			   .data(dataset, key)
-			   .enter()
-			   .append("text")
-			   .text(function(d) {
-			   		return d.key;
-			   })
-			   .attr("text-anchor", "middle")
-			   .attr("x", function(d, i) {
-			   		return xScale(i) + xScale.bandwidth() / 2;
-			   })
-			   .attr("y", function(d) {
-			   		return h - yScale(d.value) + 14;
-			   })
-			   .attr("font-family", "sans-serif")
-			   .attr("font-size", "11px")
-			   .attr("fill", "white");
-
-
-			//Slider has moved: On change, update styling
-			d3.select("input")
-				.on("change", function() {
-
-					// Slider value
-					var threshold = +d3.select(this).node().value; // Get current value of slider
-					
-					// Select the bars 
-					svg.selectAll("rect")
-						.attr("fill", function(d) { // Default fill color
-							return "rgb(0, 0," + (d.value * 30) + ")";
-						})
-						.filter(function(d) { // Filter all rectangles based on threshold value
-							return d.value <= threshold;
-						})
-						.attr("fill", "red"); // Make qualifying rectangles red
-
-				});
-
+	    <div class="page-wrap"> 
+			<div class="contents">
+				<br>
+				<section class="content">
+					<div class="d-flex justify-content-center">
 				
+						<h1 class="home-main-title">Lab 3.6</h1>
 
-			
-		</script>
+						<h2>Total Halloween Spending by Category</h2>	
+						<br>
+
+						<div class="container">
+							<div class="slider-container">
+
+								<input id="slider" type="range" min="0" max="50" step="1" value="0" orient="vertical">
+
+							</div>
+
+
+							<div id="d3-container">
+				
+								<script type="text/javascript">
+
+									//Width and height
+									var w = 600;
+									var h = 250;
+									
+									var dataset = [ { key: "costumes | 39.3", value: 39.3 },		//dataset is now an array of objects.
+													{ key: "candy | 33.0", value: 33.0 },		//Each object has a 'key' and a 'value'.
+													{ key: "decorations | 31.1", value: 31.1 },
+													{ key: "cards | 5.8", value: 5.8 } ];
+									
+									var xScale = d3.scaleBand()
+													.domain(d3.range(dataset.length))
+													.rangeRound([0, w])
+													.paddingInner(0.05);
+									
+									var yScale = d3.scaleLinear()
+													.domain([0, d3.max(dataset, function(d) { return d.value; })])
+													.range([0, h]);
+									
+									//Define key function, to be used when binding data
+									var key = function(d) {
+										return d.key;
+									};
+									
+									//Create SVG element
+									var svg = d3.select("#d3-container")
+												.append("svg")
+												.attr("width", w)
+												.attr("height", h);
+
+									//Create bars
+									svg.selectAll("rect")
+									.data(dataset, key)
+									.enter()
+									.append("rect")
+									.attr("x", function(d, i) {
+											return xScale(i);
+									})
+									.attr("y", function(d) {
+											return h - yScale(d.value);
+									})
+									.attr("width", xScale.bandwidth())
+									.attr("height", function(d) {
+											return yScale(d.value);
+									})
+									.attr("fill", function(d) {
+											return "rgb(0, 0, " + (d.value * 10) + ")";
+									});
+
+
+
+									//Create labels
+									svg.selectAll("text")
+									.data(dataset, key)
+									.enter()
+									.append("text")
+									.text(function(d) {
+											return d.key;
+									})
+									.attr("text-anchor", "middle")
+									.attr("x", function(d, i) {
+											return xScale(i) + xScale.bandwidth() / 2;
+									})
+									.attr("y", function(d) {
+											return h - yScale(d.value) + 14;
+									})
+									.attr("font-family", "sans-serif")
+									.attr("font-size", "11px")
+									.attr("fill", "white");
+
+
+									//Slider has moved: On change, update styling
+									d3.select("input")
+										.on("change", function() {
+
+											// Slider value
+											var threshold = +d3.select(this).node().value; // Get current value of slider
+											
+											// Select the bars 
+											svg.selectAll("rect")
+												.attr("fill", function(d) { // Default fill color
+													return "rgb(0, 0," + (d.value * 30) + ")";
+												})
+												.filter(function(d) { // Filter all rectangles based on threshold value
+													return d.value <= threshold;
+												})
+												.attr("fill", "red"); // Make qualifying rectangles red
+
+										});
+
+								</script>
+							</div>
+						</div>
+
+						<br><br>
+						<div class="button-container">
+							<button class="button" onclick="window.location.href='index.html'">Back to Home</button>
+						</div>
+
+						<br>
+
+
+					</div>
+				</section>
+			</div>
+		</div>
 	</body>
 </html>

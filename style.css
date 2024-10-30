@@ -110,3 +110,18 @@ h6 {
   margin: 0 10px;
   border-radius: 5px;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.slider-container {
+  margin-right: 20px;
+}
+
+#d3-container {
+  flex: 1;
+}
+
+
