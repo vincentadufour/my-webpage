@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Tableau Team 1 Project</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<style type="text/css">
+			
+			p {
+				display: inline-block;
+			}
+
+			input {
+				height: 250px;
+				width: 30px;
+
+				/* Orient vertically */
+				-webkit-appearance: slider-vertical;
+				writing-mode: bt-lr;
+			}
+
+		</style>
+		
+	</head>
+	<body>
+	    <div class="page-wrap"> 
+			<div class="contents">
+				<br>
+				<section class="content">
+					<div class="d-flex justify-content-center">
+				
+						<h1 class="home-main-title">Tableau Team 1 Project</h1>
+
+                        <h4>Participants: Emerson Hatton, Ling Thang, Vincent Dufour</h4>
+
+                        <h2>Total Sales, Profit, and Profit Ratio by Category</h2>	
+
+						<div id="d3-container">
+				
+                            <img src="images/tableau_image3.png" width="660" height="382">
+
+                            <h4>
+                                Office Supplies have the highest profit of the three categories, followed by Electronics, then Furniture.
+                            </h4>
+                            <h4>
+                                Profit Ratio is in the negative for almost all three, Furniture is the only category without a negative Profit Ratio.
+                            </h4>
+                            <h4>
+                                Electronics has the highest Sales Amount, interestingly, compared to its Profit. 
+                            </h4>
+
+
+                        </div>
+
+                        <br>
+						<h2>Profit Trends Over Time By Region</h2>	
+
+						<div id="d3-container">
+				
+                            <img src="images/tableau_image1.png" width="660" height="419">
+
+                            <h4>
+                                The East region has a peak disproportionate to the other regions in September and October of 2023.
+                                The North region has the lowest profit of all regions in March of 2023.
+                            </h4>
+                            <h4>
+                                All together, there seems to be a light seasonality where during the Spring, sales tend to go down, then the Fall is when profit is best.
+                            </h4>
+
+                        </div>
+
+                        <br>
+                        <h2>Top 5 Products by Profit Ratio</h2>
+
+                        <div id="d3-container">
+
+                            <img src="images/tableau_image2.png" width="660" height="202">
+
+                            <h4>
+                                The top 5 products by Profit Ratio are:
+                            </h4>
+
+                            <ul class="center" style="color:black">
+                                <li>Product 01</li>
+                                <li>Product 79</li>
+                                <li>Product 80</li>
+                                <li>Product 05</li>
+                                <li>Product 57</li>
+                            </ul>
+                            <h4>
+                                That being said, it seems the majority of profit ratio are negative or very low.
+                            </h4>
+
+
+                        </div>
+                        
+                        
+
+                    <br><br>
+                    <div class="button-container">
+                        <button class="button" onclick="window.location.href='index.html'">Back to Home</button>
+                    </div>
+
+                    <br>
+
+			    </section>
+		    </div>
+	    </div>
+	</body>
+</html>
