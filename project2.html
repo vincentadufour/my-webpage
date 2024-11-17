@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Project 2.1</title>
+		<title>Project 2</title>
 		<link rel="stylesheet" href="style.css">
 		<script src="https://d3js.org/d3.v7.min.js"></script>
         <style type="text/css">
@@ -29,7 +29,7 @@
 				<section class="content">
 					<div class="d-flex justify-content-center">
 				
-						<h1 class="home-main-title">Project 2</h1>
+						<h1 class="home-main-title">Project 2.2</h1>
 
 						<h2>Dog Bite Incidents by Breed</h2>	
 
@@ -51,7 +51,7 @@
                                         .attr("class", "tooltip");
                             
                                     // CSV data
-                                    d3.csv("/data/Dog_Bites_Data.csv").then(data => {
+                                    d3.csv("data/Dog_Bites_Data.csv").then(data => {
                                        
                                         //counting by breed for later use in bar graph
                                         const breedCounts = d3.rollup(
