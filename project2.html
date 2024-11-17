@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Project 2</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+	</head>
+	<body>
+	    <div class="page-wrap"> 
+			<div class="contents">
+				<br>
+				<section class="content">
+					<div class="d-flex justify-content-center">
+				
+						<h1 class="home-main-title">Project 2</h1>
+
+						<h2>Dog Bite Incidents by Breed</h2>	
+
+							<div id="d3-container">
+                                <script>
+
+                                    // making an SVG container
+                                    const margin = { top: 40, right: 30, bottom: 50, left: 50 };
+                                    const width = 660 - margin.left - margin.right;
+                                    const height = 400 - margin.top - margin.bottom;
+                            
+                                    const svg = d3.select("#d3-container").append("svg")
+                                        .attr("width", width + margin.left + margin.right)
+                                        .attr("height", height + margin.top + margin.bottom)
+                                        .append("g")
+                                        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+                            
+                                    const tooltip = d3.select("body").append("div")
+                                        .attr("class", "tooltip");
+                            
+                                    // CSV data
+                                    d3.csv("/data/Dog_Bites_Data.csv").then(data => {
+                                       
+                                        //counting by breed for later use in bar graph
+                                        const breedCounts = d3.rollup(
+                                            data,
+                                            v => v.length,
+                                            d => d.Breed
+                                        );
+                            
+                                        // transforming to array
+                                        let processedData = Array.from(breedCounts, ([Breed, Count]) => ({ Breed, Count }))
+                                            .sort((a, b) => b.Count - a.Count);
+                            
+                                        // scale
+                                        const x = d3.scaleBand()
+                                            .range([0, width])
+                                            .padding(0.1);
+                            
+                                        const y = d3.scaleLinear()
+                                            .range([height, 0]);
+                            
+                                        // starting bar graph
+                                        function updateChart(topN) {
+                                            const filteredData = processedData.slice(0, topN);
+                                            
+                                            x.domain(filteredData.map(d => d.Breed));
+                                            y.domain([0, d3.max(filteredData, d => d.Count)]).nice();
+                            
+                                            // Bind data
+                                            const bars = svg.selectAll(".bar")
+                                                .data(filteredData, d => d.Breed);
+                            
+                                            // Remove old bars
+                                            bars.exit()
+                                                .transition().duration(500)
+                                                .attr("y", y(0))
+                                                .attr("height", 0)
+                                                .remove();
+                            
+                                            // Add new bars
+                                            bars.enter()
+                                                .append("rect")
+                                                .attr("class", "bar")
+                                                .attr("x", d => x(d.Breed))
+                                                .attr("y", y(0))
+                                                .attr("width", x.bandwidth())
+                                                .attr("height", 0)
+                                                .on("mouseover", function (event, d) {
+                                                    tooltip.style("visibility", "visible")
+                                                        .text(`${d.Breed}: ${d.Count} incidents`);
+                                                })
+                                                .on("mousemove", function (event) {
+                                                    tooltip.style("top", (event.pageY - 10) + "px")
+                                                        .style("left", (event.pageX + 10) + "px");
+                                                })
+                                                .on("mouseout", function () {
+                                                    tooltip.style("visibility", "hidden");
+                                                    d3.select(this).attr("fill", "steelblue");
+                                                })
+                                                .merge(bars)
+                                                .transition().duration(1000)
+                                                .attr("x", d => x(d.Breed))
+                                                .attr("y", d => y(d.Count))
+                                                .attr("width", x.bandwidth())
+                                                .attr("height", d => height - y(d.Count));
+                            
+                                            // Update axis
+                                            svg.select(".x-axis").remove();
+                                            svg.append("g")
+                                                .attr("class", "x-axis")
+                                                .attr("transform", `translate(0, ${height})`)
+                                                .call(d3.axisBottom(x))
+                                                .selectAll("text")
+                                                .attr("transform", "rotate(-45)")
+                                                .style("text-anchor", "end");
+                            
+                                            svg.select(".y-axis").remove();
+                                            svg.append("g")
+                                                .attr("class", "y-axis")
+                                                .call(d3.axisLeft(y));
+                                        }
+                            
+                                        // start at top 5
+                                        updateChart(5);
+                            
+                                        // waits for dropdown selection
+                                        d3.select("#top-breeds-select").on("change", function () {
+                                            const selectedTopN = +this.value;
+                                            updateChart(selectedTopN);
+                                        });
+                                    }).catch(error => {
+                                        console.error("Error loading data: ", error);
+                                    });
+                                </script>
+
+							</div>
+						</div>
+
+                        <!-- dropdown to change how many breeds show up -->
+                        <div style="text-align: center; margin-top: 10px; color: black; ">
+                            <label for="top-breeds-select">Show:</label>
+                            <select id="top-breeds-select">
+                                <option value="5">Top 5</option>
+                                <option value="10">Top 10</option>
+                                <option value="15">Top 15</option>
+                                <option value="20">Top 20</option>
+                            </select>
+                        </div>
+
+						<br><br>
+						<div class="button-container">
+							<button class="button" onclick="window.location.href='index.html'">Back to Home</button>
+						</div>
+
+						<br>
+
+
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>
