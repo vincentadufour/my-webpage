@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Project 3</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+	</head>
+	<body>
+	    <div class="page-wrap"> 
+			<div class="contents">
+				<br>
+				<section class="content">
+					<div class="d-flex justify-content-center">
+				
+						<h1 class="home-main-title">Project 3: Data Storytelling</h1>
+                        <h1>The Movie Database (TMBD) Dashboard (1916 - 2016)</h1>
+
+						<h2>Dashboard Overview</h2>	
+
+						<div id="d3-container">
+				
+                            <img src="images/project3image1.png" width="660" height="368.9">
+
+                            <h4>
+                                It's hard to read each graph on this dashboard, so let's zoom into each one individually.
+                            </h4>
+
+
+                        </div>
+
+                        <br>
+                        <h2>Director Pie Chart</h2>
+
+                        <div id="d3-container">
+				
+                            <img src="images/project3image2.png" class="center" width="391" height="271">
+
+                            <h4>
+                                Selecting only movies with Chinese as the original language, we can see this pie chart's intended use.
+                                Here, we see most Chinese movies in TMDB's dataset are pretty equally distributed in amount of movies they've released,
+                                with the exception of Zhang Yimou, who has 3 movies in total.
+                            </h4>
+
+
+                        </div>
+
+                        <br>
+                        <h2>Histogram of Runtime, with Revenue as Color Gradient</h2>
+
+                        <div id="d3-container">
+				
+                            <img src="images/project3image3.png" width="660" height="212">
+
+                            <h4>
+                                This histogram shows all movies in the dataset and their runtimes in bins. Interestingly, you can see that the average revenue per movie increases as the runtime increases.
+                            </h4>
+
+
+                        </div>
+                        
+                        <br>
+                        <h2>Frequency by Release Year, with Popularity as Colour Gradient</h2>
+
+                        <div id="d3-container">
+				
+                            <img src="images/project3image4.png" width="660" height="339">
+
+                            <h4>
+                                This time series shows us that newer movies tend to be more popular than old movies. It's important to remember these reviews are likely mostly all recent reviews, as this
+                                website/database didn't exist back when most of these older movies were made.
+                            </h4>
+
+
+                        </div>
+
+                        <br>
+                        <h2>Average Revenue vs. Budget by Director, with Popularity as Bubble Size</h2>
+
+                        <div id="d3-container">
+				
+                            <img src="images/project3image5.png" width="660" height="433.5">
+
+                            <h4>
+                                This scatter plot shows up how 'efficient' a movie was in its Revenue/Budget ratio. A movie in the top-left of the chart means it had a very high budget and very low revenue,
+                                top-right means it had both a very high budget and revenue, bottom-left means it had both very low budget and revenue, and bottom-right shows a very low budget but very high
+                                revenue. This is arguable where most directors would want their movies to end up, since this is most financially efficient.
+                            </h4>
+
+
+
+                    <br><br>
+                    <div class="button-container">
+                        <button class="button" onclick="window.location.href='index.html'">Back to Home</button>
+                    </div>
+
+                    <br>
+
+			    </section>
+		    </div>
+	    </div>
+	</body>
+</html>
